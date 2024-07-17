@@ -1,8 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:weather_app/config/app_config.dart';
 import 'package:weather_app/modules/weather/data/sources/fakes/fake_city_data_source.dart';
+import 'package:weather_app/modules/weather/data/sources/fakes/fake_city_local_data_source.dart';
 import 'package:weather_app/modules/weather/data/sources/fakes/fake_weather_data_source.dart';
 import 'package:weather_app/modules/weather/data/sources/interfaces/i_city_data_source.dart';
+import 'package:weather_app/modules/weather/data/sources/interfaces/i_city_local_data_source.dart';
 import 'package:weather_app/modules/weather/data/sources/interfaces/i_weather_data_source.dart';
 
 final GetIt mockLocator = GetIt.instance;
@@ -17,5 +19,9 @@ void initLocatorForEnv({required AppConfig appConfig}) async {
 
   mockLocator.registerLazySingleton<ICityDataSource>(
     () => FakeCityDataSource(),
+  );
+
+  mockLocator.registerLazySingleton<ICityLocalDataSource>(
+    () => FakeCityLocalDataSource(),
   );
 }
