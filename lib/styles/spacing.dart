@@ -21,11 +21,3 @@ abstract class AppPadding {
     return EdgeInsets.symmetric(vertical: vertical);
   }
 }
-
-double screenHeight(BuildContext context) {
-  return MediaQuery.sizeOf(context).height;
-}
-
-double screenWidth(BuildContext context) {
-  return MediaQuery.sizeOf(context).width;
-}
