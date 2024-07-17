@@ -19,4 +19,22 @@ class FakeCityDataSource implements ICityDataSource {
       ),
     );
   }
+
+  @override
+  Future<void> addFavoriteCity(CityModel city) {
+    // TODO: implement addFavoriteCity
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<CityModel>> getFavoriteCities() {
+    // TODO: implement getFavoriteCities
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> removeFavoriteCity(CityModel city) {
+    // TODO: implement removeFavoriteCity
+    throw UnimplementedError();
+  }
 }
