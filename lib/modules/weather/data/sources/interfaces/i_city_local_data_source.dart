@@ -1,4 +1,4 @@
-import 'package:weather_app/data/models/city.model.dart';
+import 'package:weather_app/modules/weather/data/models/city.model.dart';
 
 abstract class ICityLocalDataSource {
   Future<List<CityModel>> getFavoriteCities();

@@ -1,4 +1,4 @@
-import 'package:weather_app/data/models/temperature.model.dart';
+import 'package:weather_app/modules/weather/data/models/temperature.model.dart';
 
 class Temperature {
   final double value;

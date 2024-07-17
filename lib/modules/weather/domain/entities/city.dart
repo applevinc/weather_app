@@ -1,6 +1,6 @@
-import 'package:weather_app/data/models/city.model.dart';
-import 'package:weather_app/data/models/location.model.dart';
-import 'package:weather_app/domain/entities/location.dart';
+import 'package:weather_app/modules/weather/data/models/city.model.dart';
+import 'package:weather_app/modules/weather/data/models/location.model.dart';
+import 'package:weather_app/modules/weather/domain/entities/location.dart';
 
 class City {
   final String id;

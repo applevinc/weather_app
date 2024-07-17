@@ -1,8 +1,8 @@
-import 'package:weather_app/data/models/city.model.dart';
-import 'package:weather_app/data/sources/interfaces/i_weather_data_source.dart';
-import 'package:weather_app/domain/entities/city.dart';
-import 'package:weather_app/domain/entities/weather.dart';
-import 'package:weather_app/domain/repositories/i_weather.repository.dart';
+import 'package:weather_app/modules/weather/data/models/city.model.dart';
+import 'package:weather_app/modules/weather/data/sources/interfaces/i_weather_data_source.dart';
+import 'package:weather_app/modules/weather/domain/entities/city.dart';
+import 'package:weather_app/modules/weather/domain/entities/weather.dart';
+import 'package:weather_app/modules/weather/domain/repositories/i_weather.repository.dart';
 
 class WeatherRepository implements IWeatherRepository {
   WeatherRepository({required IWeatherDataSource dataSource}) : _dataSource = dataSource;

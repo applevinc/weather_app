@@ -1,6 +1,6 @@
-import 'package:weather_app/data/sources/interfaces/i_city_data_source.dart';
-import 'package:weather_app/domain/entities/city.dart';
-import 'package:weather_app/domain/repositories/i_city.repository.dart';
+import 'package:weather_app/modules/weather/data/sources/interfaces/i_city_data_source.dart';
+import 'package:weather_app/modules/weather/domain/entities/city.dart';
+import 'package:weather_app/modules/weather/domain/repositories/i_city.repository.dart';
 
 class CityRepository implements ICityRepository {
   CityRepository({required ICityDataSource dataSource}) : _dataSource = dataSource;

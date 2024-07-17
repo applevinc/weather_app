@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/config/locators/locator.dart';
-import 'package:weather_app/views/home/home.screen.dart';
+import 'package:weather_app/modules/weather/views/home/home.screen.dart';
 
 import 'config/app_config.dart';
 import 'styles/theme.dart';

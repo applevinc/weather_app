@@ -1,4 +1,4 @@
-import 'package:weather_app/domain/entities/city.dart';
+import 'package:weather_app/modules/weather/domain/entities/city.dart';
 
 class CityModel extends City {
   CityModel({

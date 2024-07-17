@@ -1,9 +1,9 @@
-import 'package:weather_app/data/models/city.model.dart';
-import 'package:weather_app/data/models/temperature.model.dart';
-import 'package:weather_app/data/models/weather.model.dart';
-import 'package:weather_app/domain/entities/city.dart';
-import 'package:weather_app/domain/entities/temperature.dart';
-import 'package:weather_app/domain/enums/weather_type.enum.dart';
+import 'package:weather_app/modules/weather/data/models/city.model.dart';
+import 'package:weather_app/modules/weather/data/models/temperature.model.dart';
+import 'package:weather_app/modules/weather/data/models/weather.model.dart';
+import 'package:weather_app/modules/weather/domain/entities/city.dart';
+import 'package:weather_app/modules/weather/domain/entities/temperature.dart';
+import 'package:weather_app/modules/weather/domain/enums/weather_type.enum.dart';
 
 class Weather {
   final String condition;

@@ -1,4 +1,4 @@
-import 'package:weather_app/data/models/location.model.dart';
+import 'package:weather_app/modules/weather/data/models/location.model.dart';
 
 class Location {
   final double longitude;
