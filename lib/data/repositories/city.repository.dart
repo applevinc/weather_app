@@ -20,4 +20,22 @@ class CityRepository implements ICityRepository {
     _cities.addAll(cities);
     return _cities;
   }
+
+  @override
+  Future<void> addFavoriteCity(City city) {
+    // TODO: implement addFavoriteCity
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<City>> getFavoriteCities() {
+    // TODO: implement getFavoriteCities
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> removeFavoriteCity(City city) {
+    // TODO: implement removeFavoriteCity
+    throw UnimplementedError();
+  }
 }
