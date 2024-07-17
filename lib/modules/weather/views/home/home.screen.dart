@@ -8,6 +8,7 @@ import 'package:weather_app/modules/weather/views/home/home.controller.dart';
 import 'package:weather_app/modules/weather/views/my_weather/my_weather.sheet.dart';
 import 'package:weather_app/styles/colors.dart';
 import 'package:weather_app/styles/spacing.dart';
+import 'package:weather_app/utils/messenger.dart';
 import 'package:weather_app/utils/models/failure.model.dart';
 import 'package:weather_app/widgets/error_view.dart';
 import 'package:weather_app/widgets/loading_overlay_view.dart';
@@ -51,16 +52,24 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
 
     try {
       await controller.addFavoriteCity(city: city, vsync: this);
+
+      if (!mounted) {
+        return;
+      }
     } on Failure catch (e) {
-      log(e.toString());
+      Messenger.error(context: context, message: e.message);
     }
   }
 
   void delete() async {
     try {
       await context.read<WeatherHomeController>().removeCurrentCity(vsync: this);
+
+      if (!mounted) {
+        return;
+      }
     } on Failure catch (e) {
-      log(e.toString());
+      Messenger.error(context: context, message: e.message);
     }
   }
 
