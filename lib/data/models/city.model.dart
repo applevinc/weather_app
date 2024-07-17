@@ -6,4 +6,12 @@ class CityModel extends City {
     required super.name,
     required super.location,
   });
+
+  factory CityModel.fromEntity(City entity) {
+    return CityModel(
+      id: entity.id,
+      name: entity.name,
+      location: entity.location,
+    );
+  }
 }
