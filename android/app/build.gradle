@@ -51,6 +51,21 @@ android {
         versionName flutterVersionName
     }
 
+    flavorDimensions "app"
+    productFlavors {
+ 
+        mock {
+            dimension "app"
+            resValue "string", "app_name", "WeatherApp(mock)"
+        }
+
+        qa {
+           dimension "app"
+           resValue "string", "app_name", "WeatherApp(qa)"
+        }
+
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
