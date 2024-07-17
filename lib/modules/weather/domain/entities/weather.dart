@@ -11,7 +11,6 @@ class Weather {
   final Temperature maxTemperature;
   final City city;
   final WeatherType type;
-  final DateTime date;
 
   Weather({
     required this.condition,
@@ -20,7 +19,6 @@ class Weather {
     required this.maxTemperature,
     required this.city,
     required this.type,
-    required this.date,
   });
 
   factory Weather.fromModel(WeatherModel model) {
@@ -31,7 +29,6 @@ class Weather {
       maxTemperature: Temperature.fromModel(model.maxTemperature as TemperatureModel),
       city: model.city,
       type: model.type,
-      date: model.date,
     );
   }
 }

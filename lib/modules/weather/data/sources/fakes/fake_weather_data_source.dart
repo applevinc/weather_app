@@ -26,7 +26,6 @@ class FakeWeatherDataSource implements IWeatherDataSource {
       maxTemperature: TemperatureModel(random.nextInt(100).toDouble()),
       type: getOneRandomWeatherType(),
       condition: faker.lorem.sentence(),
-      date: DateTime.now(),
     );
   }
 
@@ -40,7 +39,6 @@ class FakeWeatherDataSource implements IWeatherDataSource {
       maxTemperature: TemperatureModel(random.nextInt(100).toDouble()),
       type: getOneRandomWeatherType(),
       condition: faker.lorem.sentence(),
-      date: DateTime.now(),
     );
   }
 }

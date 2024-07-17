@@ -23,7 +23,7 @@ class FakeCityDataSource implements ICityDataSource {
   @override
   Future<List<CityModel>> getFavoriteCities() async {
     await fakeNetworkDelay();
-    return List.generate(
+    final cities = List.generate(
       3,
       (index) => CityModel(
         id: faker.guid.guid(),
@@ -34,5 +34,6 @@ class FakeCityDataSource implements ICityDataSource {
         ),
       ),
     );
+    return [];
   }
 }

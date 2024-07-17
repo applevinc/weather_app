@@ -26,8 +26,12 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<WeatherHomeController>().getFavoriteCities(vsync: this);
+      init();
     });
+  }
+
+  void init() async {
+    context.read<WeatherHomeController>().getFavoriteCities(vsync: this);
   }
 
   void addCity() async {
@@ -73,6 +77,34 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
         if (controller.busy(WeatherState.getFavoriteCities)) {
           return const Scaffold(
             body: CustomLoader(),
+          );
+        }
+
+        if (controller.hasError) {
+          return Scaffold(
+            body: ErrorView(
+              error: controller.modelError,
+              retry: init,
+            ),
+          );
+        }
+
+        if (controller.favoriteCities.isEmpty) {
+          return Scaffold(
+            body: Center(
+              child: Text(
+                'No favorite cities added yet',
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontSize: 18.sp,
+                ),
+              ),
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: FloatingActionButton(
+              onPressed: addCity,
+              child: const Icon(Icons.add),
+            ),
           );
         }
 

@@ -11,8 +11,7 @@ class CityLocalDataSource implements ICityLocalDataSource {
 
   @override
   Future<List<CityModel>> getFavoriteCities() async {
-    // TODO: implement getFavoriteCities
-    throw InternalFailure();
+    return [];
   }
 
   @override

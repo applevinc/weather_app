@@ -81,6 +81,8 @@ class WeatherHomeController extends ViewController {
       _currentCity = favoriteCities.first;
       getWeather();
     } catch (e) {
+      log(e.toString());
+
       if (e is Failure) {
         setError(e);
       } else {
