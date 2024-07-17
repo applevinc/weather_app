@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:weather_app/config/app_config.dart';
+import 'package:weather_app/config/locators/locator.dart';
+
 class Failure {
   final String message;
 
@@ -24,13 +27,13 @@ Future<T> fetchDataAndHandleErrors<T>(Future<T> Function() callback) async {
     log(e.toString());
     log(s.toString());
 
-    // if (environment == AppEnvironment.qa) {
-    //   if (e is PermissionFailure) {
-    //     rethrow;
-    //   }
+    if (environment == AppEnvironment.qa) {
+      if (e is PermissionFailure) {
+        rethrow;
+      }
 
-    //   throw Failure(e.toString());
-    // }
+      throw Failure(e.toString());
+    }
 
     if (e is PermissionFailure) {
       rethrow;
@@ -48,9 +51,9 @@ void handleError(e, s) {
   log(e.toString());
   log(s.toString());
 
-  // if (environment == AppEnvironment.qa) {
-  //   throw Failure(e.toString());
-  // }
+  if (environment == AppEnvironment.qa) {
+    throw Failure(e.toString());
+  }
 
   if (e is Failure) {
     throw e;
