@@ -79,6 +79,14 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
                 padding: EdgeInsets.zero,
                 onTap: controller.onTabChanged,
               ),
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.location_pin,
+                  ),
+                ),
+              ],
             ),
             body: Builder(
               builder: (context) {
