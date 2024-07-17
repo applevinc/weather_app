@@ -20,8 +20,9 @@ class WeatherHomeController extends ViewController {
   }) {
     _cityRepository = cityRepository;
     _weatherRepository = weatherRepository;
-    getFavoriteCities();
   }
+
+  bool hasCompletedUiFrames = false;
 
   late final IWeatherRepository _weatherRepository;
 
@@ -30,6 +31,8 @@ class WeatherHomeController extends ViewController {
   List<City> _favoriteCities = [];
 
   List<City> get favoriteCities => _favoriteCities;
+
+  TabController? tabController;
 
   List<Tab> _tabs = [];
 
@@ -56,19 +59,26 @@ class WeatherHomeController extends ViewController {
     return 'H: ${weather!.maxTemperature.formatted} - L: ${weather!.minTemperature.formatted}';
   }
 
-  Future<void> getFavoriteCities() async {
+  Future<void> getFavoriteCities({required TickerProvider vsync}) async {
     clearErrors();
+    hasCompletedUiFrames = true;
 
     try {
       setBusyForObject(WeatherState.getFavoriteCities, true);
       final result = await _cityRepository.getFavoriteCities();
+
+      if (result.isEmpty) {
+        return;
+      }
+
       _favoriteCities = result;
       _tabs = result.map((e) => Tab(text: e.name)).toList();
-
-      if (favoriteCities.isNotEmpty) {
-        _currentCity = favoriteCities.first;
-        getWeather();
-      }
+      tabController = TabController(
+        length: tabs.length,
+        vsync: vsync,
+      );
+      _currentCity = favoriteCities.first;
+      getWeather();
     } catch (e) {
       if (e is Failure) {
         setError(e);
@@ -80,18 +90,28 @@ class WeatherHomeController extends ViewController {
     }
   }
 
-  Future<void> addFavoriteCity(City city) async {
+  Future<void> addFavoriteCity({
+    required City city,
+    required TickerProvider vsync,
+  }) async {
     // optimistic update
     _favoriteCities.add(city);
+    _currentCity = city;
+    _tabs.add(Tab(text: city.name));
     notifyListeners();
+    tabController = TabController(
+      length: tabs.length,
+      vsync: vsync,
+    );
+    tabController?.animateTo(_tabs.length - 1);
 
     try {
+      setBusyForObject(WeatherState.getWeather, true);
       await _cityRepository.addFavoriteCity(city);
-      // most recent tab is always the last
-      final lastTabIndex = _tabs.length - 1;
-      onTabChanged(lastTabIndex);
+      _weather = await _weatherRepository.getWeatherByCity(city);
     } catch (e) {
       _favoriteCities.removeLast();
+      _tabs.removeLast();
 
       if (e is Failure) {
         rethrow;
@@ -99,7 +119,7 @@ class WeatherHomeController extends ViewController {
         throw InternalFailure();
       }
     } finally {
-      notifyListeners();
+      setBusyForObject(WeatherState.getWeather, false);
     }
   }
 
@@ -139,7 +159,6 @@ class WeatherHomeController extends ViewController {
         throw InternalFailure();
       }
 
-      _weather = null;
       setBusyForObject(WeatherState.getWeather, true);
       _weather = await _weatherRepository.getWeatherByCity(currentCity!);
     } catch (e) {
@@ -153,5 +172,11 @@ class WeatherHomeController extends ViewController {
     } finally {
       setBusyForObject(WeatherState.getWeather, false);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    tabController?.dispose();
   }
 }

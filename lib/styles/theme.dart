@@ -63,6 +63,10 @@ abstract class AppTheme {
           ).r,
         ),
       ),
+      dividerTheme: const DividerThemeData(
+        space: 0,
+        color: AppColors.secondary,
+      ),
     );
   }
 }
