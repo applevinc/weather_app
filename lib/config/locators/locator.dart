@@ -3,6 +3,7 @@ import 'package:weather_app/config/app_config.dart';
 import 'package:weather_app/modules/weather/data/repositories/city.repository.dart';
 import 'package:weather_app/modules/weather/data/repositories/weather.repository.dart';
 import 'package:weather_app/modules/weather/data/sources/interfaces/i_city_data_source.dart';
+import 'package:weather_app/modules/weather/data/sources/interfaces/i_city_local_data_source.dart';
 import 'package:weather_app/modules/weather/data/sources/interfaces/i_weather_data_source.dart';
 import 'package:weather_app/modules/weather/domain/repositories/i_city.repository.dart';
 import 'package:weather_app/modules/weather/domain/repositories/i_weather.repository.dart';
@@ -27,7 +28,8 @@ void initLocator({required GetIt envLocator}) async {
 
   locator.registerLazySingleton<ICityRepository>(
     () => CityRepository(
-      dataSource: locator<ICityDataSource>(),
+      remoteDataSource: locator<ICityDataSource>(),
+      localDataSource: locator<ICityLocalDataSource>(),
     ),
   );
 }
