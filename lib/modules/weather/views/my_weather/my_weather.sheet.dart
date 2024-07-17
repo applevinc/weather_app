@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +23,7 @@ Future<dynamic> showMyWeatherSheet(BuildContext context) async {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({super.key});
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,7 @@ class _Body extends StatelessWidget {
           Consumer<MyWeatherController>(
             builder: (_, controller, __) {
               if (controller.isBusy) {
-                return const CustomLoader();
+                return const Expanded(child: CustomLoader());
               }
 
               if (controller.hasError) {

@@ -1,4 +1,3 @@
-import 'package:weather_app/modules/weather/data/models/city.model.dart';
 import 'package:weather_app/modules/weather/data/models/temperature.model.dart';
 import 'package:weather_app/modules/weather/data/models/weather.model.dart';
 import 'package:weather_app/modules/weather/domain/entities/city.dart';

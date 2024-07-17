@@ -11,6 +11,7 @@ import 'package:weather_app/utils/view.controller.dart';
 enum WeatherState {
   getFavoriteCities,
   getWeather,
+  removeCity,
 }
 
 class WeatherHomeController extends ViewController {
@@ -123,31 +124,38 @@ class WeatherHomeController extends ViewController {
     }
   }
 
-  Future<void> removeFavoriteCity(City city) async {
-    final index = _favoriteCities.indexWhere((element) => city.id == element.id);
-    final notFound = index == -1;
-
-    if (notFound) {
-      return;
+  Future<void> removeCurrentCity({required TickerProvider vsync}) async {
+    if (currentCity == null) {
+      throw InternalFailure();
     }
 
-    // optimistic update
-    _favoriteCities.removeAt(index);
-    notifyListeners();
-
     try {
-      await _cityRepository.removeFavoriteCity(city);
-      _favoriteCities.removeAt(index);
-    } catch (e) {
-      _favoriteCities.insert(index, city);
+      setBusyForObject(WeatherState.removeCity, true);
+      await _cityRepository.removeFavoriteCity(currentCity!);
+      final index = _favoriteCities.indexWhere((element) => currentCity!.id == element.id);
+      final notFound = index == -1;
 
+      if (notFound) {
+        return;
+      }
+
+      _favoriteCities.removeAt(index);
+      _tabs.removeAt(index);
+      _currentCity = _favoriteCities.isNotEmpty ? _favoriteCities.first : null;
+      tabController = TabController(
+        length: tabs.length,
+        vsync: vsync,
+      );
+      tabController?.animateTo(0);
+      getWeather();
+    } catch (e) {
       if (e is Failure) {
         rethrow;
       } else {
         throw InternalFailure();
       }
     } finally {
-      notifyListeners();
+      setBusyForObject(WeatherState.removeCity, false);
     }
   }
 

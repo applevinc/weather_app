@@ -3,11 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/assets/images.dart';
-import 'package:weather_app/modules/weather/domain/enums/weather_type.enum.dart';
 import 'package:weather_app/modules/weather/views/cities/cities.sheet.dart';
 import 'package:weather_app/modules/weather/views/home/home.controller.dart';
 import 'package:weather_app/modules/weather/views/my_weather/my_weather.sheet.dart';
+import 'package:weather_app/styles/colors.dart';
 import 'package:weather_app/styles/spacing.dart';
 import 'package:weather_app/utils/models/failure.model.dart';
 import 'package:weather_app/widgets/error_view.dart';
@@ -53,6 +52,14 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
     }
   }
 
+  void delete() async {
+    try {
+      await context.read<WeatherHomeController>().removeCurrentCity(vsync: this);
+    } on Failure catch (e) {
+      log(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = context.watch<WeatherHomeController>();
@@ -61,17 +68,17 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
       return const SizedBox.shrink();
     }
 
-    return LoadingOverlayView(
-      show: controller.busy(WeatherState.getFavoriteCities),
-      child: Builder(
-        builder: (context) {
-          if (controller.busy(WeatherState.getFavoriteCities)) {
-            return const Scaffold(
-              body: SizedBox.shrink(),
-            );
-          }
+    return Builder(
+      builder: (context) {
+        if (controller.busy(WeatherState.getFavoriteCities)) {
+          return const Scaffold(
+            body: CustomLoader(),
+          );
+        }
 
-          return Scaffold(
+        return LoadingOverlayView(
+          show: controller.busy(WeatherState.removeCity),
+          child: Scaffold(
             appBar: AppBar(
               title: const Text('Weather App'),
               bottom: TabBar(
@@ -158,6 +165,17 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      if (controller.tabs.length > 1)
+                        TextButton(
+                          onPressed: delete,
+                          child: Text(
+                            'Delete',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: AppColors.error,
+                            ),
+                          ),
+                        ),
                       const Spacer(flex: 2),
                     ],
                   ),
@@ -169,9 +187,9 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
               onPressed: addCity,
               child: const Icon(Icons.add),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

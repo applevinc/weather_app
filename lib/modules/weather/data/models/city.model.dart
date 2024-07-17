@@ -1,7 +1,7 @@
 import 'package:weather_app/modules/weather/domain/entities/city.dart';
 
 class CityModel extends City {
-  CityModel({
+  const CityModel({
     required super.id,
     required super.name,
     required super.location,
