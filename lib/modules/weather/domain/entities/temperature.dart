@@ -5,7 +5,7 @@ class Temperature {
 
   const Temperature(this.value);
 
-  String get formatted => '${value.toStringAsFixed(1)}°C';
+  String get formatted => '${value.round()}°C';
 
   factory Temperature.fromModel(TemperatureModel model) {
     return Temperature(model.value);

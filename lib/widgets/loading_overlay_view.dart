@@ -16,12 +16,34 @@ class LoadingOverlayView extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoadingOverlayBaseView(
       show: show,
-      loader: Container(
+      loader: const CustomLoader(),
+      child: child,
+    );
+  }
+}
+
+class CustomLoader extends StatelessWidget {
+  const CustomLoader({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
         width: 100.h,
         height: 100.h,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
         ),
         child: Transform.scale(
           scale: 0.3,
@@ -32,7 +54,6 @@ class LoadingOverlayView extends StatelessWidget {
           ),
         ),
       ),
-      child: child,
     );
   }
 }

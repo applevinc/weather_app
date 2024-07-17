@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:weather_app/modules/weather/domain/entities/city.dart';
 import 'package:weather_app/modules/weather/domain/entities/weather.dart';
@@ -34,13 +36,25 @@ class WeatherHomeController extends ViewController {
   List<Tab> get tabs => _tabs;
 
   void onTabChanged(int index) {
-    final city = _favoriteCities[index];
-    getWeather(city);
+    _currentCity = _favoriteCities[index];
+    getWeather();
   }
+
+  City? _currentCity;
+
+  City? get currentCity => _currentCity;
 
   Weather? _weather;
 
   Weather? get weather => _weather;
+
+  String get temperatureRange {
+    if (weather == null) {
+      return '';
+    }
+
+    return 'H: ${weather!.maxTemperature.formatted} - L: ${weather!.minTemperature.formatted}';
+  }
 
   Future<void> getFavoriteCities() async {
     clearErrors();
@@ -52,7 +66,8 @@ class WeatherHomeController extends ViewController {
       _tabs = result.map((e) => Tab(text: e.name)).toList();
 
       if (favoriteCities.isNotEmpty) {
-        getWeather(favoriteCities.first);
+        _currentCity = favoriteCities.first;
+        getWeather();
       }
     } catch (e) {
       if (e is Failure) {
@@ -72,7 +87,6 @@ class WeatherHomeController extends ViewController {
 
     try {
       await _cityRepository.addFavoriteCity(city);
-
       // most recent tab is always the last
       final lastTabIndex = _tabs.length - 1;
       onTabChanged(lastTabIndex);
@@ -117,13 +131,20 @@ class WeatherHomeController extends ViewController {
     }
   }
 
-  Future<void> getWeather(City city) async {
+  Future<void> getWeather() async {
     clearErrors();
 
     try {
+      if (currentCity == null) {
+        throw InternalFailure();
+      }
+
+      _weather = null;
       setBusyForObject(WeatherState.getWeather, true);
-      _weather = await _weatherRepository.getWeatherByCity(city);
+      _weather = await _weatherRepository.getWeatherByCity(currentCity!);
     } catch (e) {
+      log(e.toString());
+
       if (e is Failure) {
         setErrorForObject(WeatherState.getWeather, e);
       } else {

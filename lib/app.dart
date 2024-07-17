@@ -21,7 +21,7 @@ class App extends StatelessWidget {
           title: locator<AppConfig>().appName,
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
-          home: const HomeScreen(),
+          home: const WeatherScreen(),
         );
       },
     );

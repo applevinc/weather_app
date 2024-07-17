@@ -30,7 +30,7 @@ class Weather {
       temperature: Temperature.fromModel(model.temperature as TemperatureModel),
       minTemperature: Temperature.fromModel(model.minTemperature as TemperatureModel),
       maxTemperature: Temperature.fromModel(model.maxTemperature as TemperatureModel),
-      city: City.fromModel(model.city as CityModel),
+      city: model.city,
       type: model.type,
       date: model.date,
     );

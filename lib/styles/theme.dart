@@ -10,7 +10,7 @@ abstract class AppTheme {
       colorScheme: ColorScheme.fromSwatch(
         brightness: Brightness.light,
         primarySwatch: MaterialColor(
-          0xffE0334C,
+          0xff808080,
           <int, Color>{
             50: AppColors.primary.withOpacity(.1), //10%
             100: AppColors.primary.withOpacity(.2), //20%
@@ -33,6 +33,13 @@ abstract class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6.r),
         ),
+      ),
+      tabBarTheme: TabBarTheme(
+        labelColor: Colors.black,
+        unselectedLabelColor: Colors.black38,
+        indicatorSize: TabBarIndicatorSize.tab,
+        dividerColor: AppColors.primary.withOpacity(.1),
+        tabAlignment: TabAlignment.start,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.secondary,
