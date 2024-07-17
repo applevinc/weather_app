@@ -2,6 +2,10 @@
 
 This Flutter application provides weather information using the OpenWeather API and supports local storage with `sqflite` for persistence.
 
+## Demo
+https://github.com/user-attachments/assets/bdbd3b76-ecd1-4590-81ab-cbeff7a1b4d6
+
+
 ## Features
 
 - Display current weather conditions and forecasts.
