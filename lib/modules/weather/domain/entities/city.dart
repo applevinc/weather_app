@@ -1,13 +1,14 @@
+import 'package:equatable/equatable.dart';
 import 'package:weather_app/modules/weather/data/models/city.model.dart';
 import 'package:weather_app/modules/weather/data/models/location.model.dart';
 import 'package:weather_app/modules/weather/domain/entities/location.dart';
 
-class City {
+class City extends Equatable {
   final String id;
   final String name;
   final Location location;
 
-  City({
+  const City({
     required this.id,
     required this.name,
     required this.location,
@@ -20,4 +21,7 @@ class City {
       location: Location.fromModel(model.location as LocationModel),
     );
   }
+
+  @override
+  List<Object> get props => [id, name];
 }

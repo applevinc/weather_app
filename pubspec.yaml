@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   dio: ^5.5.0+1
+  equatable: ^2.0.5
   faker: ^2.1.0
   flutter:
     sdk: flutter
