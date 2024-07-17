@@ -25,7 +25,7 @@ abstract class AppTheme {
           },
         ),
       ),
-      textTheme: GoogleFonts.poppinsTextTheme().apply(
+      textTheme: GoogleFonts.interTextTheme().apply(
         bodyColor: AppColors.lightText,
         displayColor: AppColors.lightText,
       ),
@@ -34,10 +34,16 @@ abstract class AppTheme {
           borderRadius: BorderRadius.circular(6.r),
         ),
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: AppColors.secondary,
         elevation: 0.0,
-        iconTheme: IconThemeData(color: AppColors.lightText),
+        iconTheme: const IconThemeData(color: AppColors.lightText),
+        centerTitle: false,
+        titleTextStyle: TextStyle(
+          fontSize: 16.sp,
+          color: AppColors.lightText,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       bottomSheetTheme: BottomSheetThemeData(
         elevation: 0.0,
