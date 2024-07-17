@@ -7,6 +7,7 @@ import 'package:weather_app/modules/weather/domain/entities/city.dart';
 import 'package:weather_app/modules/weather/domain/repositories/i_city.repository.dart';
 import 'package:weather_app/modules/weather/views/cities/cities.controller.dart';
 import 'package:weather_app/widgets/error_view.dart';
+import 'package:weather_app/widgets/loading_overlay_view.dart';
 
 Future<City?> showCitiesSheet({
   required BuildContext context,
@@ -33,9 +34,7 @@ class _Body extends StatelessWidget {
     return Consumer<CitiesController>(
       builder: (_, controller, __) {
         if (controller.isBusy) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const CustomLoader();
         }
 
         if (controller.hasError) {

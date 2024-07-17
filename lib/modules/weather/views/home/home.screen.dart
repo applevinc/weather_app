@@ -7,10 +7,12 @@ import 'package:weather_app/assets/images.dart';
 import 'package:weather_app/modules/weather/domain/enums/weather_type.enum.dart';
 import 'package:weather_app/modules/weather/views/cities/cities.sheet.dart';
 import 'package:weather_app/modules/weather/views/home/home.controller.dart';
+import 'package:weather_app/modules/weather/views/my_weather/my_weather.sheet.dart';
 import 'package:weather_app/styles/spacing.dart';
 import 'package:weather_app/utils/models/failure.model.dart';
 import 'package:weather_app/widgets/error_view.dart';
 import 'package:weather_app/widgets/loading_overlay_view.dart';
+import 'package:weather_app/widgets/weather_image.component.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -81,7 +83,9 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
               ),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showMyWeatherSheet(context);
+                  },
                   icon: const Icon(
                     Icons.location_pin,
                   ),
@@ -123,7 +127,10 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
                         ),
                       ),
                       SizedBox(height: 16.h),
-                      _Image(weathertype: weather.type),
+                      WeatherImageComponent(
+                        weathertype: weather.type,
+                        size: 250.h,
+                      ),
                       SizedBox(height: 16.h),
                       Text(
                         weather.temperature.formatted,
@@ -166,58 +173,5 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
         },
       ),
     );
-  }
-}
-
-class _Image extends StatelessWidget {
-  const _Image({super.key, required this.weathertype});
-
-  final WeatherType weathertype;
-
-  @override
-  Widget build(BuildContext context) {
-    final size = 250.h;
-
-    switch (weathertype) {
-      case WeatherType.clouds:
-        return Image.asset(
-          AppImages.cloudy,
-          width: size,
-          height: size,
-          fit: BoxFit.cover,
-        );
-
-      case WeatherType.rain:
-        return Image.asset(
-          AppImages.rain,
-          width: size,
-          height: size,
-          fit: BoxFit.cover,
-        );
-
-      case WeatherType.sunny:
-        return Image.asset(
-          AppImages.sunny,
-          width: size,
-          height: size,
-          fit: BoxFit.cover,
-        );
-
-      case WeatherType.windy:
-        return Image.asset(
-          AppImages.wind,
-          width: size,
-          height: size,
-          fit: BoxFit.cover,
-        );
-
-      default:
-        return Image.asset(
-          AppImages.clear,
-          width: size,
-          height: size,
-          fit: BoxFit.cover,
-        );
-    }
   }
 }
