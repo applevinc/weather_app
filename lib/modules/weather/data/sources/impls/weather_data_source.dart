@@ -15,7 +15,7 @@ class WeatherDataSource implements IWeatherDataSource {
     return await fetchDataAndHandleErrors(() async {
       final currentPosition = await _getCurrentLocation();
       final url =
-          'https://api.openweathermap.org/data/2.5/weather?lat=${currentPosition.latitude}&lon=${currentPosition.longitude}&appid=$_apiKey';
+          'https://api.openweathermap.org/data/2.5/weather?lat=${currentPosition.latitude}&lon=${currentPosition.longitude}&appid=$_apiKey&units=metric';
       final reponse = await Dio().get(url);
       if (reponse.statusCode == 200) {
         log('RESPONSE DATA: ${reponse.data}');
@@ -60,7 +60,7 @@ class WeatherDataSource implements IWeatherDataSource {
     return await fetchDataAndHandleErrors(() async {
       final location = city.location;
       final url =
-          'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$_apiKey';
+          'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$_apiKey&units=metric';
       final reponse = await Dio().get(url);
       if (reponse.statusCode == 200) {
         log('RESPONSE DATA: ${reponse.data}');
