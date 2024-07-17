@@ -21,20 +21,28 @@ class FakeCityDataSource implements ICityDataSource {
   }
 
   @override
-  Future<void> addFavoriteCity(CityModel city) {
-    // TODO: implement addFavoriteCity
-    throw UnimplementedError();
+  Future<void> addFavoriteCity(CityModel city) async {
+    await fakeNetworkDelay();
   }
 
   @override
-  Future<List<CityModel>> getFavoriteCities() {
-    // TODO: implement getFavoriteCities
-    throw UnimplementedError();
+  Future<List<CityModel>> getFavoriteCities() async {
+    await fakeNetworkDelay();
+    return List.generate(
+      3,
+      (index) => CityModel(
+        id: faker.guid.guid(),
+        name: faker.address.city(),
+        location: LocationModel(
+          longitude: faker.geo.longitude(),
+          latitude: faker.geo.latitude(),
+        ),
+      ),
+    );
   }
 
   @override
-  Future<void> removeFavoriteCity(CityModel city) {
-    // TODO: implement removeFavoriteCity
-    throw UnimplementedError();
+  Future<void> removeFavoriteCity(CityModel city) async {
+    await fakeNetworkDelay();
   }
 }

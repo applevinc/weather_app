@@ -10,20 +10,8 @@ class CityDataSource implements ICityDataSource {
   }
 
   @override
-  Future<void> addFavoriteCity(CityModel city) {
-    // TODO: implement addFavoriteCity
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<CityModel>> getFavoriteCities() {
+  Future<List<CityModel>> getFavoriteCities() async {
     // TODO: implement getFavoriteCities
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> removeFavoriteCity(CityModel city) {
-    // TODO: implement removeFavoriteCity
-    throw UnimplementedError();
+    throw InternalFailure();
   }
 }
