@@ -21,11 +21,6 @@ class FakeCityDataSource implements ICityDataSource {
   }
 
   @override
-  Future<void> addFavoriteCity(CityModel city) async {
-    await fakeNetworkDelay();
-  }
-
-  @override
   Future<List<CityModel>> getFavoriteCities() async {
     await fakeNetworkDelay();
     return List.generate(
@@ -39,10 +34,5 @@ class FakeCityDataSource implements ICityDataSource {
         ),
       ),
     );
-  }
-
-  @override
-  Future<void> removeFavoriteCity(CityModel city) async {
-    await fakeNetworkDelay();
   }
 }
