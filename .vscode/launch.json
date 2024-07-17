@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "App(mock-debug)",
+            "name": "Mock",
             "request": "launch",
             "type": "dart",
             "program": "lib/main/main.mock.dart",
@@ -15,7 +15,7 @@
             ]
         },
         {
-            "name": "App(qa-debug)",
+            "name": "QA",
             "request": "launch",
             "type": "dart",
             "program": "lib/main/main.qa.dart",
