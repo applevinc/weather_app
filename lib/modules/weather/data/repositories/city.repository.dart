@@ -47,7 +47,13 @@ class CityRepository implements ICityRepository {
 
   Future<List<City>> _getRemoteFavoriteCities() async {
     final result = await _remoteDataSource.getFavoriteCities();
-    return result.map((e) => City.fromModel(e)).toList();
+    final cities = result.map((e) => City.fromModel(e)).toList();
+
+    for (final city in cities) {
+      await _localDataSource.addFavoriteCity(CityModel.fromEntity(city));
+    }
+
+    return cities;
   }
 
   @override

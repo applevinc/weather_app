@@ -113,13 +113,12 @@ class WeatherHomeController extends ViewController {
       await _cityRepository.addFavoriteCity(city);
       _weather = await _weatherRepository.getWeatherByCity(city);
     } catch (e) {
-      _favoriteCities.removeLast();
-      _tabs.removeLast();
+      log(e.toString());
 
       if (e is Failure) {
-        rethrow;
+        setErrorForObject(WeatherState.getWeather, e);
       } else {
-        throw InternalFailure();
+        setErrorForObject(WeatherState.getWeather, InternalFailure());
       }
     } finally {
       setBusyForObject(WeatherState.getWeather, false);

@@ -61,6 +61,15 @@ class _Body extends StatelessWidget {
                 padding: AppPadding.defaultPadding,
                 child: Column(
                   children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        weather.city.name,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                        ),
+                      ),
+                    ),
                     WeatherImageComponent(
                       weathertype: weather.type,
                       size: 120.h,

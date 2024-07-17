@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -67,6 +66,8 @@ class _WeatherScreenState extends State<WeatherScreen> with TickerProviderStateM
       if (!mounted) {
         return;
       }
+
+      Messenger.info(context: context, message: 'City removed successfully');
     } on Failure catch (e) {
       Messenger.error(context: context, message: e.message);
     }

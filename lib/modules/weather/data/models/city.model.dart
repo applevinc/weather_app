@@ -27,4 +27,24 @@ class CityModel extends City {
       ),
     );
   }
+
+  factory CityModel.fromDB(Map<String, dynamic> json) {
+    return CityModel(
+      id: faker.guid.guid(),
+      name: json['city'],
+      location: LocationModel(
+        latitude: json['lat'],
+        longitude: json['lng'],
+      ),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'city': name,
+      'lat': location.latitude,
+      'lng': location.longitude,
+    };
+  }
 }
