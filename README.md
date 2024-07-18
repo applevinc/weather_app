@@ -27,5 +27,10 @@ https://github.com/user-attachments/assets/bdbd3b76-ecd1-4590-81ab-cbeff7a1b4d6
 
 To run the app with real API implementations:
 
+## Using vscode
+Under to debug in the sidebar, select the environment you want to run in and click the play icon.
+
+## Using command line
+
 ```bash
 flutter run --flavor qa -t lib/main/main.qa.dart
